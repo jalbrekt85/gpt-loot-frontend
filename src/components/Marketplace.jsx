@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Box,
   Heading,
@@ -26,8 +26,8 @@ import { useUser } from "../context/UserContext";
 import { ethers } from "ethers";
 import CollectionItem from "./CollectionItem";
 import Master from "../abis/contracts/Master.json";
-import { HiRefresh } from "@react-icons/all-files/hi/HiRefresh";
-import { ImPriceTags } from "@react-icons/all-files/im/ImPriceTags";
+// import { HiRefresh } from "@react-icons/all-files/hi/HiRefresh";
+// import { ImPriceTags } from "@react-icons/all-files/im/ImPriceTags";
 import random from "../utils/random";
 import colors from "../utils/colors";
 
@@ -243,7 +243,7 @@ const Marketplace = ({
 </HStack>
 <Tooltip label="0.05 MATIC">
       <Button
-        leftIcon={<ImPriceTags />}
+        // leftIcon={<ImPriceTags />}
         mt={4}
         borderRadius="md"
         bgGradient={[
@@ -290,7 +290,7 @@ const Marketplace = ({
     <Center height="50px" />
     <Tooltip label="0.05 MATIC">
     <Button
-    leftIcon={<ImPriceTags />}
+    // leftIcon={<ImPriceTags />}
           mt={4}
           onClick={claimLoot}
           borderRadius="md"
@@ -316,7 +316,9 @@ const Marketplace = ({
           ]}
           bgClip="text"
           fontWeight="bold">My Loot:</Heading>
-    <IconButton icon={<HiRefresh />} onClick={refresh}/>
+    <IconButton 
+    // icon={<HiRefresh />} 
+    onClick={refresh}/>
     <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }} alignContent="center">
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
 
