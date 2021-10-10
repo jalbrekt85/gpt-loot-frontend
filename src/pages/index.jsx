@@ -1,5 +1,5 @@
 import CreateLoot from "../components/CreateLoot";
-import MarketPlace from "../components/MarketPlace";
+import MarketPlace from "../components/Marketplace";
 import MyCollection from "../components/MyCollection";
 import { useState } from "react";
 import { Container } from "../components/Container";
