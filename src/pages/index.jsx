@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import { ethers } from "ethers";
-import { useUser } from "../context/UserContext";
+import { useUser, useLogin } from "../context/UserContext";
 import useETHBalance from "../hooks/useETHBalance";
 import useNetwork from "../hooks/useNetwork";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from "@chakra-ui/react";
@@ -13,6 +13,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from "@chakra-ui/react"
 
 const NewHome = () => {
   const user = useUser();
+  const login = useLogin();
   const [userBalance] = useETHBalance(user);
   const [network] = useNetwork(user);
   const [deployedContract, setDeployedContract] = useState();
@@ -29,11 +30,19 @@ const NewHome = () => {
 
   return(
   !user ? (
+    <div>
     <Text
           fontSize={"4xl"}
           fontWeight={"bold"}>
             Switch to the Polygon Network
           </Text>
+          <button
+          type="button"
+          onClick={() => login()}
+        >
+          Login with Metamask
+        </button>
+        </div>
   ) : (
 
     <div>
@@ -112,8 +121,6 @@ const NewHome = () => {
     </div>
   )
   )
-
-  
 
 
 };

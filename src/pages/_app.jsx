@@ -11,13 +11,13 @@ const getLibrary = (provider) => {
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <ChakraProvider resetCSS theme={theme}>
       <Web3ReactProvider getLibrary={getLibrary}>
+      <ChakraProvider resetCSS theme={theme}>
         <UserContextProvider>
           <Component {...pageProps} />
         </UserContextProvider>
+        </ChakraProvider>
       </Web3ReactProvider>
-    </ChakraProvider>
   );
 };
 
