@@ -283,7 +283,7 @@ const Marketplace = ({
           margin="10px"
           noOfLines={[4, 5, 6]}
         >
-           By adding your loot, your loot set will included in the global collection - a Loot Contract that holds Loot Sets from any user who decides to add their own. By Adding your set, you'll recieve 50% of the minting fee. Select your Loot set and add!
+           Your generated loot sets will appear to the left. You can add your loot sets to a global loot contract. When somebody claims loot from the global contract, a random loot set is chosen from and the user who added the loot set will receive 50% of the minting fee
         </Text>
       </Box>
     </Box>

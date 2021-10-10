@@ -6,7 +6,8 @@ import {
   useToast,
   Stack,
   SimpleGrid,
-  Tooltip
+  Tooltip,
+  Center
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ethers } from "ethers";
@@ -208,6 +209,20 @@ const CreateLoot = ({
           setDeployedContract={setDeployedContract}
           setDeployedColor={setDeployedColor}
         />
+        <Center height="50px" />
+        <Text
+          fontSize="lg"
+          bgGradient={[
+            "linear(to-tr, teal.400, yellow.500)",
+            "linear(to-t, blue.300, teal.600)",
+            "linear(to-b, orange.200, purple.400)",
+          ]}
+          bgClip="text"
+          margin="10px"
+          noOfLines={[4, 5, 6]}
+        >
+          HINT: You can submit your generated loot at the Marketplace and earn fees when your loot set is randomly minted
+        </Text>
       </Stack>
     </SimpleGrid>
   );

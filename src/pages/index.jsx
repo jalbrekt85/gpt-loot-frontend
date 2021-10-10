@@ -8,7 +8,7 @@ import { ethers } from "ethers";
 import { useUser, useLogin } from "../context/UserContext";
 import useETHBalance from "../hooks/useETHBalance";
 import useNetwork from "../hooks/useNetwork";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Heading, Button } from "@chakra-ui/react";
 
 
 const NewHome = () => {
@@ -31,17 +31,28 @@ const NewHome = () => {
   return(
   !user ? (
     <div>
-    <Text
-          fontSize={"4xl"}
-          fontWeight={"bold"}>
-            Switch to the Polygon Network
-          </Text>
-          <button
-          type="button"
-          onClick={() => login()}
-        >
-          Login with Metamask
-        </button>
+    <Heading 
+          bgGradient={[
+            "linear(to-tr, teal.400, yellow.500)",
+            "linear(to-t, blue.300, teal.600)",
+            "linear(to-b, orange.200, purple.400)",
+          ]}
+          bgClip="text"
+          fontWeight="bold">Switch To Polygon on MetaMask and Reconnect </Heading>
+          <Button
+        mt={4}
+        onClick={() => login()}
+        borderRadius="md"
+        bgGradient={[
+          "linear(to-tr, teal.400, yellow.500)",
+          "linear(to-t, blue.300, teal.600)",
+          "linear(to-b, orange.200, purple.400)",
+        ]}
+        color="white"
+      >
+        Login/Reconnect
+      </Button>
+         
         </div>
   ) : (
 
