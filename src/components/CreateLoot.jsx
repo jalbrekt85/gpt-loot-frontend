@@ -7,7 +7,8 @@ import {
   Stack,
   SimpleGrid,
   Tooltip,
-  Center
+  Center,
+  Container
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ethers } from "ethers";
@@ -127,6 +128,7 @@ const CreateLoot = ({
 
   
   return (
+    <Container maxW={'7xl'} >
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={20}>
       <Stack>
         <ExampleNFT ItemSet={items} />
@@ -225,6 +227,7 @@ const CreateLoot = ({
         </Text>
       </Stack>
     </SimpleGrid>
+    </Container>
   );
 };
 
