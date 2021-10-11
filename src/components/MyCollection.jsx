@@ -28,7 +28,6 @@ const MyCollection = ({ deployedContract, deployedColor }) => {
   const [tokens, setTokens] = useState([])
   const [theme, setTheme] = useState("")
   const user = useUser();
-  const [userBalance] = useETHBalance(user);
   const toast = useToast()
 
   async function getTheme() {
@@ -53,6 +52,12 @@ const MyCollection = ({ deployedContract, deployedColor }) => {
     console.log(deployedContract.address)
     const tokenBal = await deployedContract.balanceOf(user.address);
     setTokensOwned(tokenBal.toString());
+  }
+
+  async function refresh() {
+    getBal()
+    getTokens()
+    getTheme()
   }
 
   async function claimLoot() {
@@ -82,13 +87,6 @@ const MyCollection = ({ deployedContract, deployedColor }) => {
     return <div></div>
   }
 
-  useEffect( () => {
-    if (deployedContract) {
-       getBal();
-       getTokens()
-       getTheme()
-    }
-  }, []);
 
   console.log(deployedContract)
  
@@ -179,7 +177,7 @@ const MyCollection = ({ deployedContract, deployedColor }) => {
           ]}
           bgClip="text"
           fontWeight="bold">My Loot:</Heading>
-           <IconButton icon={<HiRefresh />} onClick={getTokens}/>
+           <IconButton icon={<HiRefresh />} onClick={refresh}/>
         <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }} alignContent="center">
         <SimpleGrid columns={{ base: 2, md: 2 }} spacing={{ base: 2, lg: 8 }}>
         <CollectionList/>
