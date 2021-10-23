@@ -146,12 +146,14 @@ const DeployDrawer = ({
             "linear(to-t, blue.300, teal.600)",
             "linear(to-b, orange.200, purple.400)",
           ]}
-          // isDisabled={!ItemSet.weapons.length}
           onClick={onOpen}
           fontWeight="bold"
+          borderRadius="md"
+          color="white"
         >
           Deploy/Load Loot
         </Button>
+
         <Drawer
           isOpen={isOpen}
           placement="right"
@@ -171,7 +173,7 @@ const DeployDrawer = ({
                   onChange={(val) => setSelectedTheme(val)}
                   value={selectedTheme}
                 >
-                  <Stack >
+                  <Stack>
                     {itemHistory.map((item) => (
                       <Radio value={item.theme}>
                         <Badge
