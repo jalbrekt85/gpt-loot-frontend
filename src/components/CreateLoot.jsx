@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   Tooltip,
   Center,
-  Container
+  Container,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ethers } from "ethers";
@@ -20,6 +20,7 @@ import ExampleNFT from "./ExampleNFT";
 import random from "../utils/random";
 import colors from "../utils/colors";
 import { ImPriceTags } from "@react-icons/all-files/im/ImPriceTags";
+import useInterval from "react-useinterval";
 
 const CreateLoot = ({
   items,
@@ -27,7 +28,7 @@ const CreateLoot = ({
   setDeployedContract,
   setDeployedColor,
   itemHistory,
-  setItemHistory
+  setItemHistory,
 }) => {
   const contractAddress = "0x3a2696b585caE58f1F489FEf93513cb8D8886Cba";
 
@@ -35,6 +36,8 @@ const CreateLoot = ({
   const [userPrompt, setUserPrompt] = useState("");
   const [resize] = useState("vertical");
   const [isLoading, setIsLoading] = useState(false);
+  const [timeWaited, setTimeWaited] = useState(0);
+  const toast = useToast();
   const [colorsList, setColorsList] = useState([
     "red",
     "orange",
@@ -47,7 +50,16 @@ const CreateLoot = ({
     "pink",
   ]);
 
-  const toast = useToast();
+  useInterval(updateTime, 10000);
+  function updateTime() {
+    if (isLoading) {
+      setTimeWaited(timeWaited + 10);
+      console.log(timeWaited);
+    }
+    if (timeWaited >= 40) {
+      getResult();
+    }
+  }
 
   async function getResult() {
     const contract = new ethers.Contract(
@@ -79,6 +91,7 @@ const CreateLoot = ({
     setItems(newItems);
     setItemHistory([...itemHistory, newItems]);
 
+    setTimeWaited(0);
     setIsLoading(false);
   }
 
@@ -111,7 +124,7 @@ const CreateLoot = ({
       }
     });
 
-    const tx = await contract.requestBytes(userPrompt, {value: fee});
+    const tx = await contract.requestBytes(userPrompt, { value: fee });
     await tx.wait();
 
     const requestId = await contract.userToId(user.address);
@@ -126,107 +139,108 @@ const CreateLoot = ({
     setIsLoading(true);
   }
 
-  
   return (
-    <Container maxW={'7xl'} >
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={20}>
-      <Stack>
-        <ExampleNFT ItemSet={items} />
-      </Stack>
-      <Stack>
-        <Text
-          fontSize="2xl"
-          bgGradient={[
-            "linear(to-tr, teal.400, yellow.500)",
-            "linear(to-t, blue.300, teal.600)",
-            "linear(to-b, orange.200, purple.400)",
-          ]}
-          bgClip="text"
-          fontWeight="bold"
-        >
-          Enter Loot Theme:
-        </Text>
-        <Textarea
-          maxW="sm"
-          borderWidth="3px"
-          borderRadius="lg"
-          overflow="hidden"
-          p="3"
-          fontWeight="semibold"
-          variant="outline"
-          onChange={(e) => setUserPrompt(e.target.value)}
-          value={userPrompt}
-          resize={resize}
-          mt={4}
-        />
-<Tooltip label="0.01 MATIC">
-        <Button
-        leftIcon={<ImPriceTags />}
-        mt={4}
-        isLoading={isLoading}
-        onClick={requestPrompt}
-        borderRadius="md"
-        bgGradient={[
-          "linear(to-tr, teal.400, yellow.500)",
-          "linear(to-t, blue.300, teal.600)",
-          "linear(to-b, orange.200, purple.400)",
-        ]}
-        color="white"
-      >
-        Submit
-      </Button>
-      </Tooltip>
+    <Container maxW={"7xl"}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={20}>
+        <Stack>
+          <ExampleNFT ItemSet={items} />
+        </Stack>
+        <Stack>
+          <Text
+            fontSize="2xl"
+            bgGradient={[
+              "linear(to-tr, teal.400, yellow.500)",
+              "linear(to-t, blue.300, teal.600)",
+              "linear(to-b, orange.200, purple.400)",
+            ]}
+            bgClip="text"
+            fontWeight="bold"
+          >
+            Enter Loot Theme:
+          </Text>
+          <Textarea
+            maxW="sm"
+            borderWidth="3px"
+            borderRadius="lg"
+            overflow="hidden"
+            p="3"
+            fontWeight="semibold"
+            variant="outline"
+            onChange={(e) => setUserPrompt(e.target.value)}
+            value={userPrompt}
+            resize={resize}
+            mt={4}
+          />
+          <Tooltip label="0.01 MATIC">
+            <Button
+              leftIcon={<ImPriceTags />}
+              mt={4}
+              isLoading={isLoading}
+              onClick={requestPrompt}
+              borderRadius="md"
+              bgGradient={[
+                "linear(to-tr, teal.400, yellow.500)",
+                "linear(to-t, blue.300, teal.600)",
+                "linear(to-b, orange.200, purple.400)",
+              ]}
+              color="white"
+            >
+              Submit
+            </Button>
+          </Tooltip>
 
-        <SkeletonText
-          isLoaded={!isLoading}
-          noOfLines={4}
-          spacing="4"
-          startColor="pink.500"
-          endColor="orange.500"
-          height="50px"
-          width="400px"
-          padding="3"
-          mt={3}
-        >
-          <ItemTable ItemSet={items} />
-        </SkeletonText>
-      </Stack>
-      <Stack>
-        <Text
-          fontSize="lg"
-          bgGradient={[
-            "linear(to-tr, teal.400, yellow.500)",
-            "linear(to-t, blue.300, teal.600)",
-            "linear(to-b, orange.200, purple.400)",
-          ]}
-          bgClip="text"
-          margin="10px"
-          noOfLines={[4, 5, 6]}
-        >
-          Select Your Loot Set, Configure your Contract and Deploy! You'll be
-          able to view your deployed contract and NFTs from here and OpenSea
-        </Text>
-        <DeployDrawer
-          itemHistory={itemHistory}
-          setDeployedContract={setDeployedContract}
-          setDeployedColor={setDeployedColor}
-        />
-        <Center height="50px" />
-        <Text
-          fontSize="lg"
-          bgGradient={[
-            "linear(to-tr, teal.400, yellow.500)",
-            "linear(to-t, blue.300, teal.600)",
-            "linear(to-b, orange.200, purple.400)",
-          ]}
-          bgClip="text"
-          margin="10px"
-          noOfLines={[4, 5, 6]}
-        >
-          HINT: You can submit your generated loot at the Marketplace and earn fees when your loot set is randomly minted
-        </Text>
-      </Stack>
-    </SimpleGrid>
+          <SkeletonText
+            isLoaded={!isLoading}
+            noOfLines={4}
+            spacing="4"
+            startColor="pink.500"
+            endColor="orange.500"
+            height="50px"
+            width="400px"
+            padding="3"
+            mt={3}
+          >
+            <ItemTable ItemSet={items} />
+          </SkeletonText>
+          <Center height="500px" />
+        </Stack>
+        <Stack>
+          <Text
+            fontSize="lg"
+            bgGradient={[
+              "linear(to-tr, teal.400, yellow.500)",
+              "linear(to-t, blue.300, teal.600)",
+              "linear(to-b, orange.200, purple.400)",
+            ]}
+            bgClip="text"
+            margin="10px"
+            noOfLines={[4, 5, 6]}
+          >
+            Select Your Loot Set, Configure your Contract and Deploy! You'll be
+            able to view your deployed contract and NFTs from here and OpenSea
+          </Text>
+          <DeployDrawer
+            itemHistory={itemHistory}
+            setDeployedContract={setDeployedContract}
+            setDeployedColor={setDeployedColor}
+          />
+          <Center height="50px" />
+          <Text
+            fontSize="lg"
+            bgGradient={[
+              "linear(to-tr, teal.400, yellow.500)",
+              "linear(to-t, blue.300, teal.600)",
+              "linear(to-b, orange.200, purple.400)",
+            ]}
+            bgClip="text"
+            margin="10px"
+            noOfLines={[4, 5, 6]}
+          >
+            HINT: You can submit your generated loot at the Marketplace and earn
+            fees when your loot set is randomly minted
+          </Text>
+        </Stack>
+      </SimpleGrid>
     </Container>
   );
 };

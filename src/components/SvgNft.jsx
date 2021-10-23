@@ -1,4 +1,4 @@
-import { Skeleton, Box } from "@chakra-ui/react";
+import { Skeleton, Flex, VStack, SkeletonText } from "@chakra-ui/react";
 
 const SvgNft = ({ ItemSet }) => {
   const Svg = () => {
@@ -42,15 +42,9 @@ const SvgNft = ({ ItemSet }) => {
   };
   if (ItemSet.weapons.length === 0) {
     return (
-      <Box h="400px" w="400px">
-        <Skeleton height="30px" width="75%" margin={6} />
-        <Skeleton height="30px" width="75%" margin={6} />
-        <Skeleton height="30px" width="75%" margin={6} />
-        <Skeleton height="30px" width="75%" margin={6} />
-        <Skeleton height="30px" width="75%" margin={6} />
-        <Skeleton height="30px" width="75%" margin={6} />
-        <Skeleton height="30px" width="75%" margin={6} />
-      </Box>
+      <div align="center">
+        <SkeletonText noOfLines={9} spacing="7" margin={8} />
+      </div>
     );
   }
   return <Svg />;
