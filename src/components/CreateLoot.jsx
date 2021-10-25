@@ -9,6 +9,10 @@ import {
   Tooltip,
   Center,
   Container,
+  IconButton,
+  Flex,
+  Box,
+  Spacer,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ethers } from "ethers";
@@ -20,6 +24,7 @@ import ExampleNFT from "./ExampleNFT";
 import random from "../utils/random";
 import colors from "../utils/colors";
 import { ImPriceTags } from "@react-icons/all-files/im/ImPriceTags";
+import { BiHelpCircle } from "@react-icons/all-files/bi/BiHelpCircle";
 import useInterval from "react-useinterval";
 
 const CreateLoot = ({
@@ -54,7 +59,6 @@ const CreateLoot = ({
   function updateTime() {
     if (isLoading) {
       setTimeWaited(timeWaited + 10);
-      console.log(timeWaited);
     }
     if (timeWaited >= 40) {
       getResult();
@@ -146,6 +150,21 @@ const CreateLoot = ({
           <ExampleNFT ItemSet={items} />
         </Stack>
         <Stack>
+          <Spacer />
+          {/* <IconButton
+            size="md"
+            fontSize="lg"
+            aria-label={"Github"}
+            variant="ghost"
+            color="current"
+            ml={{ base: "0", md: "3" }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href =
+                "https://github.com/jalbrekt85/ETH-Global-GPT-NFT";
+            }}
+            icon={<BiHelpCircle />}
+          /> */}
           <Text
             fontSize="2xl"
             bgGradient={[
@@ -158,6 +177,7 @@ const CreateLoot = ({
           >
             Enter Loot Theme:
           </Text>
+
           <Textarea
             maxW="sm"
             borderWidth="3px"
@@ -171,6 +191,7 @@ const CreateLoot = ({
             resize={resize}
             mt={4}
           />
+
           <Tooltip label="0.01 MATIC">
             <Button
               leftIcon={<ImPriceTags />}

@@ -52,7 +52,6 @@ const MyCollection = ({ deployedContract, deployedColor }) => {
   }
 
   async function getBal() {
-    console.log(deployedContract.address);
     const tokenBal = await deployedContract.balanceOf(user.address);
     setTokensOwned(tokenBal.toString());
   }

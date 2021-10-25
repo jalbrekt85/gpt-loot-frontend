@@ -8,8 +8,16 @@ import { ethers } from "ethers";
 import { useUser, useLogin } from "../context/UserContext";
 import useETHBalance from "../hooks/useETHBalance";
 import useNetwork from "../hooks/useNetwork";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Heading, Button } from "@chakra-ui/react";
-
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
+import Help from "../components/Help";
 
 const NewHome = () => {
   const user = useUser();
@@ -28,18 +36,20 @@ const NewHome = () => {
     colorTheme: "",
   });
 
-  return(
-  !user ? (
+  return !user ? (
     <div>
-    <Heading 
-          bgGradient={[
-            "linear(to-tr, teal.400, yellow.500)",
-            "linear(to-t, blue.300, teal.600)",
-            "linear(to-b, orange.200, purple.400)",
-          ]}
-          bgClip="text"
-          fontWeight="bold">Switch To Polygon on MetaMask and Reconnect </Heading>
-          <Button
+      <Heading
+        bgGradient={[
+          "linear(to-tr, teal.400, yellow.500)",
+          "linear(to-t, blue.300, teal.600)",
+          "linear(to-b, orange.200, purple.400)",
+        ]}
+        bgClip="text"
+        fontWeight="bold"
+      >
+        Switch To Polygon on MetaMask and Reconnect{" "}
+      </Heading>
+      <Button
         mt={4}
         onClick={() => login()}
         borderRadius="md"
@@ -52,10 +62,8 @@ const NewHome = () => {
       >
         Login/Reconnect
       </Button>
-         
-        </div>
+    </div>
   ) : (
-
     <div>
       <Header
         account={
@@ -75,7 +83,7 @@ const NewHome = () => {
           .substring(0, 6)}
       />
 
-      <Container height="100vh">
+      <Container height="125vh">
         <Tabs variant="unstyled" align="center">
           <TabList>
             <Tab
@@ -102,6 +110,14 @@ const NewHome = () => {
             >
               My Collection
             </Tab>
+            <Tab
+              _selected={{
+                color: "white",
+                bgGradient: "linear(to-b, orange.100, purple.300)",
+              }}
+            >
+              Help
+            </Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -116,9 +132,7 @@ const NewHome = () => {
             </TabPanel>
 
             <TabPanel>
-              <MarketPlace
-                itemHistory={itemHistory}
-              />
+              <MarketPlace itemHistory={itemHistory} />
             </TabPanel>
             <TabPanel>
               <MyCollection
@@ -126,14 +140,14 @@ const NewHome = () => {
                 deployedColor={deployedColor}
               />
             </TabPanel>
+            <TabPanel>
+              <Help />
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Container>
     </div>
-  )
-  )
-
-
+  );
 };
 
 export default NewHome;

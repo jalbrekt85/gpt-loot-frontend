@@ -19,7 +19,7 @@ import { AiFillGithub } from "@react-icons/all-files/ai/AiFillGithub";
 import { useUser } from "../context/UserContext";
 
 export default function App(props) {
-  const user = useUser()
+  const user = useUser();
   const { toggleColorMode: toggleMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
@@ -115,8 +115,9 @@ export default function App(props) {
             ml={{ base: "0", md: "3" }}
             onClick={(e) => {
               e.preventDefault();
-              window.location.href='https://github.com/jalbrekt85/ETH-Global-GPT-NFT';
-              }}
+              window.location.href =
+                "https://github.com/jalbrekt85/ETH-Global-GPT-NFT";
+            }}
             icon={<AiFillGithub />}
           />
           <IconButton
@@ -130,12 +131,10 @@ export default function App(props) {
             icon={<SwitchIcon />}
           />
           {!user && (
-          <Text
-          fontSize={"xl"}
-          fontWeight={"bold"}>
-            Switch to the Polygon Network
-          </Text>
-        )}
+            <Text fontSize={"xl"} fontWeight={"bold"}>
+              Switch to the Polygon Network
+            </Text>
+          )}
           {Web3Component(props.account, FaAddressCard)}
           {Web3Component(props.network, FaNetworkWired)}
           {Web3Component(props.balance, FaEthereum)}

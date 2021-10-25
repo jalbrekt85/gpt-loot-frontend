@@ -28,7 +28,7 @@ import {
   InputLeftElement,
   Input,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ImRocket } from "@react-icons/all-files/im/ImRocket";
 import { ethers } from "ethers";
 import Loot from "../abis/contracts/Loot.json";
@@ -43,7 +43,6 @@ const DeployDrawer = ({
   const user = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef();
-
   const [selectedTheme, setSelectedTheme] = useState();
   const [numTokens, setNumTokens] = useState(10000);
   const [isLoading, setIsLoading] = useState(false);

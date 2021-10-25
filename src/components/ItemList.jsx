@@ -15,8 +15,8 @@ const ItemList = ({ items }) => {
           fontWeight="bold"
         >
           <List>
-            {items.map((item) => (
-              <ListItem key={item}>{item}</ListItem>
+            {items.map((item, index) => (
+              <ListItem key={index}>{item}</ListItem>
             ))}
           </List>
         </Text>
