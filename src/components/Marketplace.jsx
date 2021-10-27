@@ -349,7 +349,7 @@ const Marketplace = ({ itemHistory }) => {
             fontWeight={"bold"}
             isDisabled={!user}
           >
-            Claim Random Loot
+            Claim Loot From Marketplace
           </Button>
         </span>
       </Tooltip>
