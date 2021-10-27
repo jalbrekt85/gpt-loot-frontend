@@ -8,7 +8,7 @@ import {
   Box,
   Text,
   Heading,
-  Spacer,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
 import { FaMoon } from "@react-icons/all-files/fa/FaMoon";
@@ -17,10 +17,11 @@ import { FaAddressCard } from "@react-icons/all-files/fa/FaAddressCard";
 import { FaNetworkWired } from "@react-icons/all-files/fa/FaNetworkWired";
 import { FaEthereum } from "@react-icons/all-files/fa/FaEthereum";
 import { AiFillGithub } from "@react-icons/all-files/ai/AiFillGithub";
-import { useUser } from "../context/UserContext";
+import { useUser, useLogin } from "../context/UserContext";
 
 export default function App(props) {
   const user = useUser();
+  const login = useLogin();
   const { toggleColorMode: toggleMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
@@ -34,6 +35,7 @@ export default function App(props) {
   React.useEffect(() => {
     return scrollY.onChange(() => setY(scrollY.get()));
   }, [scrollY]);
+
   const Web3Component = (text, icon) => {
     return (
       <Box
@@ -70,6 +72,32 @@ export default function App(props) {
           {text}
         </Box>
       </Box>
+    );
+  };
+
+  const LoginButton = () => {
+    return (
+      <Tooltip label={"Switch to the Polygon Network and click 'Connect'"}>
+        <Box
+          as="button"
+          display={{ base: "none", md: "flex" }}
+          alignItems="center"
+          bg="gray.50"
+          borderWidth="1px"
+          borderColor="gray.200"
+          px="1em"
+          minH="36px"
+          rounded="md"
+          fontSize="lg"
+          color="gray.800"
+          outline="0"
+          ml={5}
+          fontWeight="semibold"
+          onClick={() => login()}
+        >
+          Connect on Polygon
+        </Box>
+      </Tooltip>
     );
   };
 
@@ -131,10 +159,9 @@ export default function App(props) {
             onClick={toggleMode}
             icon={<SwitchIcon />}
           />
-
-          {Web3Component(props.account, FaAddressCard)}
-          {Web3Component(props.network, FaNetworkWired)}
-          {Web3Component(props.balance, FaEthereum)}
+          {!user ? LoginButton() : Web3Component(props.account, FaAddressCard)}
+          {user && Web3Component(props.network, FaNetworkWired)}
+          {user && Web3Component(props.balance, FaEthereum)}
           <IconButton
             display={{ base: "flex", md: "none" }}
             aria-label="Open menu"
