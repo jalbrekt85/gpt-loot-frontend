@@ -210,17 +210,17 @@ const Marketplace = ({ itemHistory }) => {
 
   return (
     <Container maxW={"7xl"}>
-      <Text>
-        View Marketplace Contract on{" "}
-        <Link
-          color="purple.300"
-          href="https://opensea.io/collection/gpt-loot-marketplace"
-        >
-          OpenSea
-        </Link>
-        <Spacer height="20px" />
-      </Text>
       <StatGroup>
+        <Text>
+          View Marketplace Contract on{" "}
+          <Link
+            color="purple.300"
+            href="https://opensea.io/collection/gpt-loot-marketplace"
+          >
+            OpenSea
+          </Link>
+          <Spacer height="20px" />
+        </Text>
         <Stat>
           <StatLabel>Loot Sets Added</StatLabel>
           <StatNumber>{itemsAdded}</StatNumber>
@@ -259,24 +259,32 @@ const Marketplace = ({ itemHistory }) => {
             <HStack>
               <ShowItems />
             </HStack>
-            <Tooltip label="0.05 MATIC">
-              <Button
-                leftIcon={<ImPriceTags />}
-                mt={4}
-                borderRadius="md"
-                bgGradient={[
-                  "linear(to-tr, teal.400, yellow.500)",
-                  "linear(to-t, blue.300, teal.600)",
-                  "linear(to-b, orange.200, purple.400)",
-                ]}
-                color="white"
-                px={4}
-                h={8}
-                isDisabled={itemHistory.length < 1}
-                onClick={addNewItemSet}
-              >
-                Add To Global Contract
-              </Button>
+            <Tooltip
+              label={
+                itemHistory.length < 1
+                  ? "Generate some loot first!"
+                  : "0.05 MATIC"
+              }
+            >
+              <span>
+                <Button
+                  leftIcon={<ImPriceTags />}
+                  mt={4}
+                  borderRadius="md"
+                  bgGradient={[
+                    "linear(to-tr, teal.400, yellow.500)",
+                    "linear(to-t, blue.300, teal.600)",
+                    "linear(to-b, orange.200, purple.400)",
+                  ]}
+                  color="white"
+                  px={4}
+                  h={8}
+                  isDisabled={itemHistory.length < 1}
+                  onClick={addNewItemSet}
+                >
+                  Add To Marketplace Contract
+                </Button>
+              </span>
             </Tooltip>
           </Table>
         </Box>
@@ -307,24 +315,31 @@ const Marketplace = ({ itemHistory }) => {
         </Box>
       </Box>
       <Center height="50px" />
-      <Tooltip label="0.05 MATIC">
-        <Button
-          leftIcon={<ImPriceTags />}
-          mt={4}
-          onClick={claimLoot}
-          borderRadius="md"
-          bgGradient={[
-            "linear(to-tr, teal.400, yellow.500)",
-            "linear(to-t, blue.300, teal.600)",
-            "linear(to-b, orange.200, purple.400)",
-          ]}
-          color="white"
-          px={12}
-          h={12}
-          fontWeight={"bold"}
-        >
-          Claim Random Loot
-        </Button>
+      <Tooltip
+        label={
+          user ? "0.05 MATIC" : "Not Connected. Switch To Polygon and Refresh"
+        }
+      >
+        <span>
+          <Button
+            leftIcon={<ImPriceTags />}
+            mt={4}
+            onClick={claimLoot}
+            borderRadius="md"
+            bgGradient={[
+              "linear(to-tr, teal.400, yellow.500)",
+              "linear(to-t, blue.300, teal.600)",
+              "linear(to-b, orange.200, purple.400)",
+            ]}
+            color="white"
+            px={12}
+            h={12}
+            fontWeight={"bold"}
+            isDisabled={!user}
+          >
+            Claim Random Loot
+          </Button>
+        </span>
       </Tooltip>
       <Center height="50px" />
       <Heading

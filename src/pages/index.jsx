@@ -36,34 +36,7 @@ const NewHome = () => {
     colorTheme: "",
   });
 
-  return !user ? (
-    <div>
-      <Heading
-        bgGradient={[
-          "linear(to-tr, teal.400, yellow.500)",
-          "linear(to-t, blue.300, teal.600)",
-          "linear(to-b, orange.200, purple.400)",
-        ]}
-        bgClip="text"
-        fontWeight="bold"
-      >
-        Switch To Polygon on MetaMask and Reconnect{" "}
-      </Heading>
-      <Button
-        mt={4}
-        onClick={() => login()}
-        borderRadius="md"
-        bgGradient={[
-          "linear(to-tr, teal.400, yellow.500)",
-          "linear(to-t, blue.300, teal.600)",
-          "linear(to-b, orange.200, purple.400)",
-        ]}
-        color="white"
-      >
-        Login/Reconnect
-      </Button>
-    </div>
-  ) : (
+  return (
     <div>
       <Header
         account={
@@ -74,7 +47,7 @@ const NewHome = () => {
                 user.address.length - 3,
                 user.address.length
               )
-            : "Wrong Network"
+            : "0x"
         }
         network={network}
         balance={ethers.utils

@@ -131,11 +131,7 @@ export default function App(props) {
             onClick={toggleMode}
             icon={<SwitchIcon />}
           />
-          {!user && (
-            <Text fontSize={"xl"} fontWeight={"bold"}>
-              Switch to the Polygon Network
-            </Text>
-          )}
+
           {Web3Component(props.account, FaAddressCard)}
           {Web3Component(props.network, FaNetworkWired)}
           {Web3Component(props.balance, FaEthereum)}

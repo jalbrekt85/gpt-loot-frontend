@@ -110,6 +110,7 @@ const CreateLoot = ({
       });
       return;
     }
+
     const contract = new ethers.Contract(
       contractAddress,
       Consumer.abi,
@@ -179,22 +180,31 @@ const CreateLoot = ({
             mt={4}
           />
 
-          <Tooltip label="0.01 MATIC">
-            <Button
-              leftIcon={<ImPriceTags />}
-              mt={4}
-              isLoading={isLoading}
-              onClick={requestPrompt}
-              borderRadius="md"
-              bgGradient={[
-                "linear(to-tr, teal.400, yellow.500)",
-                "linear(to-t, blue.300, teal.600)",
-                "linear(to-b, orange.200, purple.400)",
-              ]}
-              color="white"
-            >
-              Submit
-            </Button>
+          <Tooltip
+            label={
+              user
+                ? "0.01 MATIC"
+                : "Not Connected. Switch To Polygon and Refresh"
+            }
+          >
+            <span>
+              <Button
+                leftIcon={<ImPriceTags />}
+                mt={4}
+                isLoading={isLoading}
+                onClick={requestPrompt}
+                borderRadius="md"
+                bgGradient={[
+                  "linear(to-tr, teal.400, yellow.500)",
+                  "linear(to-t, blue.300, teal.600)",
+                  "linear(to-b, orange.200, purple.400)",
+                ]}
+                color="white"
+                isDisabled={!user}
+              >
+                Submit
+              </Button>
+            </span>
           </Tooltip>
 
           <SkeletonText
