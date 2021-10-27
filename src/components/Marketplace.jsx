@@ -197,12 +197,24 @@ const Marketplace = ({ itemHistory }) => {
   function CollectionList() {
     if (tokens) {
       return tokens.map((token) => (
-        <CollectionItem
-          image={token.image}
-          theme={token.theme}
-          color={random(colors)}
-          tokenId={token.id}
-        />
+        <Tooltip label={"View On OpenSea"} bg="purple.200" placement="top">
+          <Box
+            as="button"
+            href="https://chakra-ui.com"
+            _hover={{ background: "#555" }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = `https://opensea.io/assets/matic/0xa82b3db1c1a5591269070eff28a9b0fb4cc1007c/${token.id}`;
+            }}
+          >
+            <CollectionItem
+              image={token.image}
+              theme={token.theme}
+              color={random(colors)}
+              tokenId={token.id}
+            />
+          </Box>
+        </Tooltip>
       ));
     }
     return <div></div>;
