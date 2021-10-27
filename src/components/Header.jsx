@@ -9,6 +9,7 @@ import {
   Text,
   Heading,
   Tooltip,
+  Button,
 } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
 import { FaMoon } from "@react-icons/all-files/fa/FaMoon";
@@ -80,13 +81,12 @@ export default function App(props) {
       <Tooltip label={"Switch to the Polygon Network and click 'Connect'"}>
         <Box
           as="button"
-          display={{ base: "none", md: "flex" }}
+          // display={{ base: "blox", md: "flex" }}
           alignItems="center"
           bg="gray.50"
           borderWidth="1px"
           borderColor="gray.200"
           px="1em"
-          minH="36px"
           rounded="md"
           fontSize="lg"
           color="gray.800"
@@ -103,7 +103,7 @@ export default function App(props) {
 
   return (
     <Box pos="relative" alignItems="right ">
-      <Flex w="full" h="full" px="16" align="center" justify="space-between">
+      <Flex px="3" align="center" justify="space-between">
         <Heading
           fontSize="4xl"
           bgGradient={[
@@ -149,6 +149,7 @@ export default function App(props) {
             }}
             icon={<AiFillGithub />}
           />
+
           <IconButton
             size="md"
             fontSize="lg"
@@ -162,13 +163,6 @@ export default function App(props) {
           {!user ? LoginButton() : Web3Component(props.account, FaAddressCard)}
           {user && Web3Component(props.network, FaNetworkWired)}
           {user && Web3Component(props.balance, FaEthereum)}
-          <IconButton
-            display={{ base: "flex", md: "none" }}
-            aria-label="Open menu"
-            fontSize="20px"
-            color={useColorModeValue("gray.800", "inherit")}
-            variant="ghost"
-          />
         </Flex>
       </Flex>
     </Box>
