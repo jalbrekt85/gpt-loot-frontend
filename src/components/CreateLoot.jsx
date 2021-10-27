@@ -11,7 +11,7 @@ import {
   Container,
   IconButton,
   Flex,
-  Box,
+  Heading,
   Spacer,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -151,20 +151,7 @@ const CreateLoot = ({
         </Stack>
         <Stack>
           <Spacer />
-          {/* <IconButton
-            size="md"
-            fontSize="lg"
-            aria-label={"Github"}
-            variant="ghost"
-            color="current"
-            ml={{ base: "0", md: "3" }}
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href =
-                "https://github.com/jalbrekt85/ETH-Global-GPT-NFT";
-            }}
-            icon={<BiHelpCircle />}
-          /> */}
+
           <Text
             fontSize="2xl"
             bgGradient={[
@@ -223,6 +210,7 @@ const CreateLoot = ({
           >
             <ItemTable ItemSet={items} />
           </SkeletonText>
+
           <Center height="500px" />
         </Stack>
         <Stack>

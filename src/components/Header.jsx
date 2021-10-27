@@ -8,6 +8,7 @@ import {
   Box,
   Text,
   Heading,
+  Spacer,
 } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
 import { FaMoon } from "@react-icons/all-files/fa/FaMoon";

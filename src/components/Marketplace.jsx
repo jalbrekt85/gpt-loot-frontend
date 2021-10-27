@@ -21,6 +21,8 @@ import {
   StatNumber,
   StatGroup,
   Tooltip,
+  Link,
+  Spacer,
 } from "@chakra-ui/react";
 import { useUser } from "../context/UserContext";
 import { ethers } from "ethers";
@@ -208,6 +210,16 @@ const Marketplace = ({ itemHistory }) => {
 
   return (
     <Container maxW={"7xl"}>
+      <Text>
+        View Marketplace Contract on{" "}
+        <Link
+          color="purple.300"
+          href="https://opensea.io/collection/gpt-loot-marketplace"
+        >
+          OpenSea
+        </Link>
+        <Spacer height="20px" />
+      </Text>
       <StatGroup>
         <Stat>
           <StatLabel>Loot Sets Added</StatLabel>
